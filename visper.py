@@ -3,6 +3,10 @@ import requests
 from requests import auth
 from requests.auth import HTTPBasicAuth
 
+with open("./secrets.json","r") as creds:
+    un = creds["credentials"]["username"]
+    pw = creds.json["credentials"]["password"]
+
 
 texts = [
     'Здорова, ватное быдло! Как дела? Ну что, можно тебя поздравить! Ты did it',
@@ -57,4 +61,5 @@ content_upload = requests.get(
 fileMF = requests.get('https://visper.tech/api/document/start/127027',
 headers={'Authorization': "Bearer " + head},
 )
-print(fileMF.json())
+#print(fileMF.json())
+print(os.getcwd())
