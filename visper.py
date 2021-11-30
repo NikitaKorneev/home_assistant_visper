@@ -13,7 +13,7 @@ with open("./secrets.json","r") as cred:
 
 texts = [
     "Здорова, ватное быдло! Как дела? Ну что, можно тебя поздравить! Ты did it",
-    "Лох! Пидр, нет друзей!",
+    "Лох! П***, нет друзей!",
 ]
 
 token = requests.post("https://visper.tech/api/token/", {
