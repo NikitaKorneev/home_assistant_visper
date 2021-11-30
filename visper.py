@@ -1,25 +1,28 @@
 import os
 import requests
+import json
 from requests import auth
 from requests.auth import HTTPBasicAuth
 
-with open("./secrets.json","r") as creds:
-    un = creds["credentials"]["username"]
-    pw = creds.json["credentials"]["password"]
+with open("./secrets.json","r") as cred:
+    creds = cred.read()
+    creds2 = json.loads(creds)
+    un = creds2["credentials"]["username"]
+    pw = creds2["credentials"]["password"]
 
 
 texts = [
-    'Здорова, ватное быдло! Как дела? Ну что, можно тебя поздравить! Ты did it',
-    'Лох! Пидр, нет друзей!',
+    "Здорова, ватное быдло! Как дела? Ну что, можно тебя поздравить! Ты did it",
+    "Лох! Пидр, нет друзей!",
 ]
 
-token = requests.post('https://visper.tech/api/token/', {
+token = requests.post("https://visper.tech/api/token/", {
     "username":un,
     "password":pw
 }
 )
 
-head = token.json()['access']
+head = token.json()["access"]
 
 dat = {
     "name": "Новый ролик",
@@ -37,7 +40,7 @@ dat = {
     ]
 }
 content_upload = requests.get(
-    'https://visper.tech/api/document/',
+    "https://visper.tech/api/document/",
     data={
     "name": "Новый ролик",
     "speaker_id": 324,
@@ -53,13 +56,14 @@ content_upload = requests.get(
         }
     ]
 },
-    headers={'Authorization': "Bearer " + head},
+    headers={"Authorization": "Bearer " + head},
 )
 
-#print(token.json()['access'])
+#print(token.json()["access"])
 #print(content_upload.json())
-fileMF = requests.get('https://visper.tech/api/document/start/127027',
-headers={'Authorization': "Bearer " + head},
+fileMF = requests.get("https://visper.tech/api/document/start/127027",
+headers={"Authorization": "Bearer " + head},
 )
 #print(fileMF.json())
 print(os.getcwd())
+print(un, pw)
